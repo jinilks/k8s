@@ -22,8 +22,8 @@ RUN apt-get update -qq && apt-get install -y \
     && rm -rf /var/lib/apt/lists/ && rm -rf /var/cache/apt/
 # App related configuration
 COPY . /opt/app
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY default  /etc/nginx/sites-available/default.conf
+COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY conf/default  /etc/nginx/sites-available/default.conf
 WORKDIR /opt/app
 RUN pip install --upgrade pip
 RUN pip install -r ./requirements.txt
