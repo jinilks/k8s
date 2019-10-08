@@ -4,4 +4,6 @@ services:
 
 before_install:
   - docker build -t leo524/valle-docker . 
+script:
+  - docker --version
 
