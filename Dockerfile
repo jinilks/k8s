@@ -26,7 +26,7 @@ COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY conf/default  /etc/nginx/sites-available/default.conf
 WORKDIR /opt/app
 RUN pip install --upgrade pip
-RUN pip install -r ./requirements.txt
+RUN pip install -r ./requirement.txt
 RUN pip install uwsgi
 EXPOSE 8080
 # CMD ["python", "manage.py" ,"runserver", "0.0.0.0:8080"]
