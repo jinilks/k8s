@@ -28,7 +28,7 @@ WORKDIR /opt/app
 RUN pip install --upgrade pip
 RUN pip install -r ./requirement.txt
 RUN pip install uwsgi
-EXPOSE 8080
+EXPOSE 80
 # CMD ["python", "manage.py" ,"runserver", "0.0.0.0:8080"]
 
 CMD ["nginx", "-g", "daemon off;"] 
