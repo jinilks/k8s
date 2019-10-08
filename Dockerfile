@@ -23,11 +23,14 @@ RUN apt-get update -qq && apt-get install -y \
 # App related configuration
 COPY . /opt/app
 COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN rm -f /etc/nginx/sites-available/default.conf
 COPY conf/default  /etc/nginx/sites-available/default.conf
 WORKDIR /opt/app
 RUN pip install --upgrade pip
 RUN pip install -r ./requirement.txt
 RUN pip install uwsgi
+RUN service supervisor restart
+RUN service nginx restart
 EXPOSE 80
 # CMD ["python", "manage.py" ,"runserver", "0.0.0.0:8080"]
 
