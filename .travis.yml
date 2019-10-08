@@ -3,5 +3,5 @@ services:
   - docker
 
 before_install:
-  - docker build -t leo524/valle-docker -f Dockerfile
+  - docker build -t leo524/valle-docker . 
 
