@@ -6,4 +6,17 @@ before_install:
   - docker build -t leo524/valle-docker . 
 script:
   - docker --version
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "test-app"
+  env: "TestApp-env"
+  bucket_name: "elasticbeanstalk-us-east-1-029877336573"
+  bucket_path: "test-app"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+  
 
