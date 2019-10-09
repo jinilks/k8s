@@ -1,6 +1,6 @@
 FROM python:3.6-stretch
 
-MAINTAINER  Leo "flywithlg@gmail.com"
+MAINTAINER Dockerfiles
 
 # Install required packages and remove the apt packages cache when done.
 
@@ -30,7 +30,7 @@ RUN apt-get update && \
     pip3 install -U pip setuptools && \
     rm -rf /var/lib/apt/lists/*
 
-# install uwsgi module
+# install uwsgi now because it takes a little while
 RUN pip3 install uwsgi
 
 # setup all the configfiles
@@ -39,13 +39,16 @@ COPY nginx-app.conf /etc/nginx/sites-available/default
 COPY supervisor-app.conf /etc/supervisor/conf.d/
 
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
-# to prevent re-installing 
+# to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
 
 COPY app/requirements.txt /home/docker/code/app/
 RUN pip3 install -r /home/docker/code/app/requirements.txt
 
-# add the application to docker container
+# add (the rest of) our code
 COPY . /home/docker/code/
+
+# install django, normally you would remove this step because your project would already
+# be installed in the code/app/ directory
 
 
 EXPOSE 80
