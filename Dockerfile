@@ -42,7 +42,7 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 # to prevent re-installing 
 
 COPY app1/requirement.txt /home/docker/code/app/
-RUN pip3 install -r /home/docker/code/app/requirements.txt
+RUN pip3 install -r /home/docker/code/app/requirement.txt
 
 # add the application to docker container
 COPY . /home/docker/code/
